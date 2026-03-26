@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GrowBizz India — Fill Your Appointment Book. Keep It Full.</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --white: #ffffff; --off-white: #f9f9f7; --light: #f2f2ef; --border: #e5e5e0;
+    --text: #1a1a1a; --muted: #666660; --hint: #999990;
+    --blue: #2563eb; --blue-light: #eff6ff; --blue-mid: #bfdbfe;
+    --green: #16a34a; --green-light: #dcfce7;
+    --amber-light: #fffbeb;
+    --saffron: #f97316; --saffron-light: #fff7ed;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, h4 { font-family: 'Sora', sans-serif; line-height: 1.2; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.96); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.25rem; display: flex; align-items: center; justify-content: space-between; height: 56px;
+  }
+  .logo { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 18px; color: var(--text); text-decoration: none; }
+  .logo span { color: var(--saffron); }
+  .nav-cta { background: var(--saffron); color: #fff; border: none; border-radius: 8px; padding: 8px 18px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: none; }
+
+  .trust-bar { background: var(--text); padding: 0.75rem 0; overflow: hidden; }
+  .trust-scroll { display: flex; gap: 2.5rem; animation: marquee 25s linear infinite; white-space: nowrap; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .trust-item { font-size: 12px; color: rgba(255,255,255,0.5); display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; }
+  .trust-item b { color: var(--saffron); font-weight: 500; }
+
+  .hero { background: var(--off-white); padding: 3.5rem 1.25rem 3rem; text-align: center; border-bottom: 1px solid var(--border); }
+  .container { max-width: 600px; margin: 0 auto; }
+
+  .hero-badge { display: inline-block; background: var(--saffron-light); color: var(--saffron); font-size: 12px; font-weight: 500; padding: 4px 14px; border-radius: 20px; margin-bottom: 1.25rem; border: 1px solid #fed7aa; }
+  .hero h1 { font-size: clamp(26px, 7vw, 38px); font-weight: 700; margin-bottom: 1rem; letter-spacing: -0.02em; }
+  .hero h1 span { color: var(--saffron); }
+  .hero p { font-size: 15px; color: var(--muted); margin-bottom: 0.75rem; max-width: 440px; margin-left: auto; margin-right: auto; }
+  .hero-sub { font-size: 13px !important; color: var(--hint) !important; margin-bottom: 1.75rem !important; }
+
+  .niche-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 2rem; text-align: left; }
+  .niche-tag { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+
+  .btn-primary { display: block; background: var(--saffron); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500; padding: 15px 32px; border-radius: 10px; text-decoration: none; border: none; cursor: pointer; transition: background 0.15s; width: 100%; text-align: center; }
+  .btn-primary:hover { background: #ea6c0a; }
+  .btn-outline { display: block; background: var(--white); color: var(--saffron); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; padding: 13px 32px; border-radius: 10px; text-decoration: none; border: 1.5px solid #fed7aa; cursor: pointer; width: 100%; text-align: center; margin-top: 10px; }
+  .btn-outline:hover { background: var(--saffron-light); }
+
+  section { padding: 3.5rem 1.25rem; }
+  .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--hint); text-transform: uppercase; margin-bottom: 8px; }
+  .section-title { font-size: clamp(22px, 5vw, 30px); font-weight: 700; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
+  .section-sub { font-size: 15px; color: var(--muted); margin-bottom: 1.75rem; }
+
+  .problem-section { background: var(--white); }
+  .problem-list { display: flex; flex-direction: column; gap: 10px; }
+  .problem-item { display: flex; align-items: flex-start; gap: 12px; background: var(--off-white); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+  .problem-icon { width: 34px; height: 34px; border-radius: 8px; background: #fee2e2; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 16px; }
+  .problem-item h4 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+  .problem-item p { font-size: 13px; color: var(--muted); }
+
+  .video-section { background: var(--off-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .video-placeholder { background: #1a1a1a; border-radius: 14px; aspect-ratio: 16/9; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; cursor: pointer; }
+  .play-btn { width: 60px; height: 60px; border-radius: 50%; background: rgba(249,115,22,0.2); border: 2px solid rgba(249,115,22,0.6); display: flex; align-items: center; justify-content: center; }
+  .video-placeholder p { color: rgba(255,255,255,0.4); font-size: 13px; }
+
+  .outcomes-section { background: var(--white); }
+  .outcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .outcome-card { background: var(--off-white); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem; }
+  .outcome-number { font-family: 'Sora', sans-serif; font-size: 30px; font-weight: 700; color: var(--saffron); line-height: 1; margin-bottom: 6px; }
+  .outcome-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .outcome-card p { font-size: 12px; color: var(--muted); }
+
+  .industries-section { background: var(--off-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .industry-grid { display: flex; flex-direction: column; gap: 10px; }
+  .industry-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 12px; }
+  .industry-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--saffron-light); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .industry-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+  .industry-card p { font-size: 12px; color: var(--muted); }
+
+  .whatwedo-section { background: var(--white); }
+  .wa-callout { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 1rem; }
+  .wa-icon { width: 36px; height: 36px; border-radius: 50%; background: #22c55e; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 18px; }
+  .wa-callout h4 { font-size: 14px; font-weight: 600; margin-bottom: 3px; color: #166534; }
+  .wa-callout p { font-size: 12px; color: #15803d; }
+
+  .free-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem; margin-bottom: 1rem; }
+  .free-badge { display: inline-block; background: var(--green-light); color: var(--green); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; }
+  .free-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .free-price { font-size: 28px; font-weight: 700; color: var(--green); margin-bottom: 4px; }
+  .free-card > p { font-size: 13px; color: var(--muted); margin-bottom: 1rem; }
+
+  .paid-card { background: var(--white); border: 2px solid var(--saffron); border-radius: 14px; padding: 1.25rem; margin-bottom: 1rem; }
+  .paid-badge { display: inline-block; background: var(--saffron-light); color: var(--saffron); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; }
+  .paid-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .paid-price { font-size: 26px; font-weight: 700; color: var(--saffron); margin-bottom: 4px; }
+  .paid-price span { font-size: 14px; font-weight: 400; color: var(--muted); }
+  .paid-card > p { font-size: 13px; color: var(--muted); margin-bottom: 1rem; }
+
+  .feature-list { display: flex; flex-direction: column; }
+  .feature-row { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--light); }
+  .feature-row:last-child { border-bottom: none; }
+  .check-circle { width: 18px; height: 18px; border-radius: 50%; background: var(--green-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 3px; }
+  .feature-row h4 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+  .feature-row p { font-size: 12px; color: var(--muted); }
+  .divider-text { text-align: center; padding: 0.5rem 0 1.25rem; color: var(--hint); font-size: 13px; }
+
+  .cases-section { background: var(--off-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .case-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem; margin-bottom: 10px; }
+  .case-niche { display: inline-block; background: var(--saffron-light); color: var(--saffron); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; border: 1px solid #fed7aa; }
+  .case-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+  .case-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+  .case-stat { background: var(--off-white); border-radius: 10px; padding: 10px 8px; text-align: center; border: 1px solid var(--border); }
+  .case-stat .num { font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 700; color: var(--saffron); display: block; }
+  .case-stat .label { font-size: 10px; color: var(--muted); }
+  .case-card blockquote { font-size: 13px; color: var(--muted); font-style: italic; border-left: 3px solid #fed7aa; padding-left: 12px; }
+
+  .reviews-section { background: var(--white); }
+  .review-card { background: var(--off-white); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem; margin-bottom: 10px; }
+  .stars { color: #f59e0b; font-size: 14px; margin-bottom: 10px; letter-spacing: 2px; }
+  .review-card p { font-size: 14px; color: var(--text); margin-bottom: 12px; line-height: 1.65; }
+  .reviewer { display: flex; align-items: center; gap: 10px; }
+  .avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 600; flex-shrink: 0; }
+  .reviewer-info p:first-child { font-size: 14px; font-weight: 600; }
+  .reviewer-info p:last-child { font-size: 12px; color: var(--muted); }
+
+  .pricing-section { background: var(--off-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .price-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .price-row:last-child { border-bottom: none; }
+  .price-row p { font-size: 14px; }
+  .price-row span { font-size: 14px; font-weight: 600; color: var(--saffron); }
+
+  .cta-section { background: var(--text); text-align: center; padding: 4rem 1.25rem; }
+  .cta-section .section-label { color: rgba(255,255,255,0.35); }
+  .cta-section h2 { color: #fff; margin-bottom: 1rem; font-size: clamp(24px, 6vw, 34px); }
+  .cta-section p { color: rgba(255,255,255,0.55); margin-bottom: 2rem; font-size: 15px; }
+  .btn-cta-dark { display: block; background: var(--saffron); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; padding: 15px 32px; border-radius: 10px; text-decoration: none; max-width: 340px; margin: 0 auto; }
+  .cta-note { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 12px; }
+
+  .sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; background: var(--white); border-top: 1px solid var(--border); padding: 10px 1.25rem; z-index: 99; display: flex; gap: 10px; align-items: center; }
+  .sticky-label { font-size: 12px; color: var(--muted); white-space: nowrap; line-height: 1.4; }
+  .sticky-label strong { display: block; font-size: 13px; color: var(--text); }
+  .sticky-cta a { flex: 1; background: var(--saffron); color: #fff; text-align: center; padding: 12px; border-radius: 10px; font-size: 15px; font-weight: 500; text-decoration: none; font-family: 'DM Sans', sans-serif; }
+
+  footer { background: var(--off-white); border-top: 1px solid var(--border); padding: 2rem 1.25rem 7rem; text-align: center; }
+  .footer-logo { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 16px; color: var(--text); text-decoration: none; display: inline-block; margin-bottom: 6px; }
+  footer p { font-size: 12px; color: var(--hint); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-up { animation: fadeUp 0.5s ease forwards; }
+  .d1 { animation-delay: 0.05s; opacity: 0; }
+  .d2 { animation-delay: 0.15s; opacity: 0; }
+  .d3 { animation-delay: 0.25s; opacity: 0; }
+
+  @media (min-width: 640px) {
+    .sticky-cta { display: none; }
+    footer { padding-bottom: 2rem; }
+    .industry-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">Grow<span>Bizz</span></a>
+  <a href="#book" class="nav-cta">Book Free Call</a>
+</nav>
+
+<div class="trust-bar">
+  <div class="trust-scroll">
+    <span class="trust-item">✦ <b>Clinics</b> booking 3x more patients</span>
+    <span class="trust-item">✦ <b>Coaches</b> filling batches on autopilot</span>
+    <span class="trust-item">✦ <b>CAs</b> reactivating old clients</span>
+    <span class="trust-item">✦ <b>Advocates</b> booking consultations automatically</span>
+    <span class="trust-item">✦ All follow-ups on <b>WhatsApp</b></span>
+    <span class="trust-item">✦ <b>Real estate</b> booking site visits automatically</span>
+    <span class="trust-item">✦ <b>Clinics</b> booking 3x more patients</span>
+    <span class="trust-item">✦ <b>Coaches</b> filling batches on autopilot</span>
+    <span class="trust-item">✦ <b>CAs</b> reactivating old clients</span>
+    <span class="trust-item">✦ <b>Advocates</b> booking consultations automatically</span>
+    <span class="trust-item">✦ All follow-ups on <b>WhatsApp</b></span>
+    <span class="trust-item">✦ <b>Real estate</b> booking site visits automatically</span>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge fade-up">🇮🇳 Built for Indian businesses</div>
+    <h1 class="fade-up d1">Your business loses<br>clients every day.<br><span>We stop that.</span></h1>
+    <p class="fade-up d2">We build you a free professional website and a system that automatically follows up on WhatsApp, books appointments, and grows your Google reviews.</p>
+    <p class="hero-sub fade-up d2">No tech knowledge needed. We set everything up for you.</p>
+    <div class="niche-grid fade-up d3">
+      <div class="niche-tag">🏥 Clinics &amp; Derma</div>
+      <div class="niche-tag">📚 Coaching &amp; Education</div>
+      <div class="niche-tag">⚖️ Advocates &amp; Legal</div>
+      <div class="niche-tag">💰 CAs &amp; Tax Firms</div>
+      <div class="niche-tag">🛡️ Insurance Agents</div>
+      <div class="niche-tag">🏢 Real Estate</div>
+      <div class="niche-tag">✈️ Travel Agencies</div>
+      <div class="niche-tag">🏠 PG &amp; Hostels</div>
+    </div>
+    <a href="#book" class="btn-primary fade-up d3">📞 Book a Free Call →</a>
+    <a href="#what-we-do" class="btn-outline fade-up d3">See How It Works</a>
+  </div>
+</section>
+
+<section class="problem-section" id="problem">
+  <div class="container">
+    <p class="section-label">The problem</p>
+    <h2 class="section-title">Clients are ready. But you're losing them.</h2>
+    <p class="section-sub">This is happening in your business right now — every single day.</p>
+    <div class="problem-list">
+      <div class="problem-item">
+        <div class="problem-icon">📵</div>
+        <div><h4>No website or an outdated one</h4><p>Clients Google you, find nothing credible, and go to your competitor who looks professional online.</p></div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">⏳</div>
+        <div><h4>Slow follow-up loses the deal</h4><p>Someone enquires on Instagram or Google. You reply 6 hours later. They've already booked someone else.</p></div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">📞</div>
+        <div><h4>Missed calls = missed income</h4><p>You're in a meeting or with a client. A ₹50,000 enquiry calls and you miss it. No automatic callback.</p></div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">⭐</div>
+        <div><h4>Zero Google reviews</h4><p>Your competitor has 80 five-star reviews. You have none. Clients trust reviews more than anything else.</p></div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">💸</div>
+        <div><h4>Old clients never come back</h4><p>You have hundreds of past clients sitting in your phone. Nobody is following up to bring them back.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="video-section" id="demo">
+  <div class="container">
+    <p class="section-label">See it live</p>
+    <h2 class="section-title" style="margin-bottom:1.25rem;">Watch this working for a real Indian business</h2>
+    <div class="video-placeholder">
+      <div class="play-btn">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="white" style="margin-left:3px;"><path d="M5 4l14 7-14 7V4z"/></svg>
+      </div>
+      <p>Your case study video goes here</p>
+    </div>
+    <div style="margin-top:1.25rem; background:var(--white); border:1px solid var(--border); border-radius:12px; padding:1rem 1.25rem; text-align:center;">
+      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Book a free 15-min call and we'll show you exactly what we'd build for your business.</p>
+      <a href="#book" class="btn-primary">Book a Free Call →</a>
+    </div>
+  </div>
+</section>
+
+<section class="outcomes-section" id="results">
+  <div class="container">
+    <p class="section-label">Results</p>
+    <h2 class="section-title">What happens in the first 30 days</h2>
+    <p class="section-sub">Businesses across India see this after we install the system.</p>
+    <div class="outcome-grid">
+      <div class="outcome-card">
+        <div class="outcome-number">3–5×</div>
+        <h4>More appointments booked</h4>
+        <p>Leads that used to disappear now get followed up on WhatsApp automatically.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-number">₹0</div>
+        <h4>Cost to get started</h4>
+        <p>Website is completely free. No setup fees, no hidden costs.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-number">24/7</div>
+        <h4>WhatsApp follow-up</h4>
+        <p>System responds to enquiries instantly — even at midnight when you're asleep.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-number">30+</div>
+        <h4>New Google reviews</h4>
+        <p>Automated review requests sent to past clients via WhatsApp every month.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="industries-section" id="industries">
+  <div class="container">
+    <p class="section-label">Who we work with</p>
+    <h2 class="section-title">Built for high-ticket Indian businesses</h2>
+    <p class="section-sub">If your average client is worth ₹50,000 or more, one extra client a month covers the entire system.</p>
+    <div class="industry-grid">
+      <div class="industry-card"><div class="industry-icon">🏥</div><div><h4>Clinics &amp; Aesthetic Centres</h4><p>Derma, cosmetology, dental — book consultations automatically via WhatsApp.</p></div></div>
+      <div class="industry-card"><div class="industry-icon">📚</div><div><h4>Coaching &amp; Education</h4><p>Fill demo classes, follow up with enquiries, reactivate old leads.</p></div></div>
+      <div class="industry-card"><div class="industry-icon">⚖️</div><div><h4>Advocates &amp; Legal</h4><p>Book consultations, build trust with reviews, never miss an enquiry.</p></div></div>
+      <div class="industry-card"><div class="industry-icon">💰</div><div><h4>CAs, Tax &amp; Accounting</h4><p>Reactivate old clients at tax season, get referrals on autopilot.</p></div></div>
+      <div class="industry-card"><div class="industry-icon">🛡️</div><div><h4>Insurance Agents</h4><p>Old lead reactivation is a goldmine. We automate the entire follow-up.</p></div></div>
+      <div class="industry-card"><div class="industry-icon">🏢</div><div><h4>Real Estate &amp; Leasing</h4><p>Book site visits automatically. Follow up with every enquiry instantly.</p></div></div>
+      <div class="industry-card"><div class="industry-icon">✈️</div><div><h4>Travel Agencies</h4><p>Capture enquiries, send packages on WhatsApp, book consultation calls.</p></div></div>
+      <div class="industry-card"><div class="industry-icon">🏠</div><div><h4>PG &amp; Hostels</h4><p>Auto-respond to room enquiries, book visits, collect Google reviews.</p></div></div>
+    </div>
+    <div style="margin-top:1.5rem;"><a href="#book" class="btn-primary">Book a Free Call →</a></div>
+  </div>
+</section>
+
+<section class="whatwedo-section" id="what-we-do">
+  <div class="container">
+    <p class="section-label">What we do</p>
+    <h2 class="section-title">Two steps. One system.</h2>
+    <p class="section-sub">Start free. Upgrade to fill your calendar.</p>
+
+    <div class="wa-callout">
+      <div class="wa-icon">💬</div>
+      <div><h4>Everything runs on WhatsApp</h4><p>All follow-ups, booking confirmations, and review requests go through WhatsApp — where your clients already are.</p></div>
+    </div>
+
+    <div class="free-card">
+      <span class="free-badge">Step 1 — Completely Free</span>
+      <h3>We build your website</h3>
+      <div class="free-price">₹0</div>
+      <p>A professional website with your real photos, services, and testimonials. Mobile-first design.</p>
+      <div class="feature-list">
+        <div class="feature-row">
+          <div class="check-circle"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><h4>Your real photos &amp; work</h4><p>Before/after, office photos, team — builds immediate trust with visitors.</p></div>
+        </div>
+        <div class="feature-row">
+          <div class="check-circle"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><h4>Services, pricing &amp; FAQ</h4><p>Everything a client needs to say yes — before they even call you.</p></div>
+        </div>
+        <div class="feature-row">
+          <div class="check-circle"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><h4>Mobile-first design</h4><p>Looks perfect on every phone — that's where your clients are browsing.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider-text">↓ Upgrade to start getting clients automatically</div>
+
+    <div class="paid-card">
+      <span class="paid-badge">Step 2 — The Growth System</span>
+      <h3>Everything that fills your calendar</h3>
+      <div class="paid-price">₹15,000–₹20,000 <span>/ month</span></div>
+      <p>A system, not a service. Built once. Runs on autopilot. You focus on your clients — we handle everything else.</p>
+      <div class="feature-list">
+        <div class="feature-row">
+          <div class="check-circle"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><h4>Online appointment booking</h4><p>Clients pick a slot directly. Confirmed on WhatsApp automatically. No phone tag.</p></div>
+        </div>
+        <div class="feature-row">
+          <div class="check-circle"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><h4>Instant WhatsApp follow-up</h4><p>New enquiry → they get a WhatsApp reply in seconds. Before they call your competitor.</p></div>
+        </div>
+        <div class="feature-row">
+          <div class="check-circle"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><h4>Missed call WhatsApp-back</h4><p>Miss a call? Client gets a WhatsApp message in seconds. No lead ever lost again.</p></div>
+        </div>
+        <div class="feature-row">
+          <div class="check-circle"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><h4>5-star Google review automation</h4><p>We WhatsApp past clients for reviews. Only 4–5 star reviews go live on Google.</p></div>
+        </div>
+        <div class="feature-row">
+          <div class="check-circle"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><h4>Old client reactivation</h4><p>We WhatsApp your past clients and dead leads automatically to bring them back.</p></div>
+        </div>
+        <div class="feature-row">
+          <div class="check-circle"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><h4>Your own business app</h4><p>All leads, bookings, reviews, and messages in one app on your phone.</p></div>
+        </div>
+      </div>
+      <a href="#book" class="btn-primary" style="margin-top:1.25rem;">Book a Free Call →</a>
+    </div>
+
+    <div style="background:var(--amber-light); border-radius:12px; padding:14px 16px; border:1px solid #fde68a;">
+      <p style="font-size:13px; color:#92400e;"><strong>The math:</strong> If your average client is worth ₹50,000–₹1,00,000, you only need one extra client a month to more than cover the system. Most businesses get 3–5 in week one.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cases-section" id="cases">
+  <div class="container">
+    <p class="section-label">Case studies</p>
+    <h2 class="section-title" style="margin-bottom:1.5rem;">Real Indian businesses. Real results.</h2>
+    <div class="case-card">
+      <span class="case-niche">🏥 Aesthetic Clinic — Mumbai</span>
+      <h4>Dr. Priya's clinic went from 8 to 27 consultations a month</h4>
+      <div class="case-stats">
+        <div class="case-stat"><span class="num">27</span><div class="label">consults/mo</div></div>
+        <div class="case-stat"><span class="num">43</span><div class="label">new reviews</div></div>
+        <div class="case-stat"><span class="num">₹9.5L</span><div class="label">added revenue</div></div>
+      </div>
+      <blockquote>"Patients were finding us on Google but never booking. The WhatsApp follow-up now books them automatically. My receptionist doesn't chase anyone anymore."</blockquote>
+    </div>
+    <div class="case-card">
+      <span class="case-niche">📚 Coaching Institute — Pune</span>
+      <h4>Rahul's coaching centre filled 3 batches in 30 days</h4>
+      <div class="case-stats">
+        <div class="case-stat"><span class="num">3</span><div class="label">batches filled</div></div>
+        <div class="case-stat"><span class="num">60+</span><div class="label">demo bookings</div></div>
+        <div class="case-stat"><span class="num">₹4.2L</span><div class="label">month 1 fees</div></div>
+      </div>
+      <blockquote>"We had hundreds of old enquiries sitting in Excel. The reactivation campaign brought in 18 students in the first week alone."</blockquote>
+    </div>
+    <div class="case-card">
+      <span class="case-niche">⚖️ Advocate — Delhi</span>
+      <h4>Advocate Sharma books 15 consultations a week on autopilot</h4>
+      <div class="case-stats">
+        <div class="case-stat"><span class="num">15</span><div class="label">consults/week</div></div>
+        <div class="case-stat"><span class="num">#1</span><div class="label">Google rank</div></div>
+        <div class="case-stat"><span class="num">₹6L</span><div class="label">extra/month</div></div>
+      </div>
+      <blockquote>"I had no website and relied entirely on referrals. Now clients find me on Google, see my reviews, and book directly. Everything changed."</blockquote>
+    </div>
+    <a href="#book" class="btn-primary" style="margin-top:1.5rem;">Get These Results →</a>
+  </div>
+</section>
+
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <p class="section-label">Testimonials</p>
+    <h2 class="section-title" style="margin-bottom:1.5rem;">What our clients say</h2>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p>"Within the first week, 6 old clients came back just from the WhatsApp reactivation. That alone was ₹3 lakh in revenue I would've just left on the table."</p>
+      <div class="reviewer">
+        <div class="avatar" style="background:#fff7ed; color:#ea580c;">AK</div>
+        <div class="reviewer-info"><p>Amit K.</p><p>Insurance Agent — Bengaluru</p></div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p>"My Google reviews went from 4 to 51 in one month. Now I rank above clinics that have been around for 10 years. The system paid for itself on day one."</p>
+      <div class="reviewer">
+        <div class="avatar" style="background:#f0fdf4; color:#16a34a;">NR</div>
+        <div class="reviewer-info"><p>Dr. Neha R.</p><p>Dermatologist — Hyderabad</p></div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p>"I used to lose clients just because I was in a meeting. The missed call WhatsApp system has recovered at least 4–5 high-value clients every single month."</p>
+      <div class="reviewer">
+        <div class="avatar" style="background:#eff6ff; color:#2563eb;">VS</div>
+        <div class="reviewer-info"><p>Vikram S.</p><p>CA Firm — Chennai</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <p class="section-label">Pricing</p>
+    <h2 class="section-title">Simple, transparent pricing</h2>
+    <p class="section-sub">No hidden fees. No long contracts. Cancel anytime.</p>
+    <div style="background:var(--white); border:1px solid var(--border); border-radius:14px; padding:1.25rem;">
+      <div class="price-row"><p>Professional Website</p><span>Free</span></div>
+      <div class="price-row"><p>Full Growth System</p><span>₹15,000–₹20,000/mo</span></div>
+      <div class="price-row"><p>Setup Fee</p><span>₹0</span></div>
+      <div class="price-row"><p>Contract</p><span>None — cancel anytime</span></div>
+      <div class="price-row"><p>WhatsApp integration</p><span>Included</span></div>
+      <div class="price-row"><p>Business app</p><span>Included</span></div>
+    </div>
+    <div style="margin-top:1.25rem;"><a href="#book" class="btn-primary">Get Started Free →</a></div>
+  </div>
+</section>
+
+<section class="cta-section" id="book">
+  <div class="container">
+    <p class="section-label">Get started today</p>
+    <h2>Ready to stop losing clients?</h2>
+    <p>Book a free 15-minute call. We'll show you exactly what we'd build for your business — no pressure, no commitment.</p>
+    <a href="https://calendly.com" target="_blank" class="btn-cta-dark">📞 Book a Free Call</a>
+    <p class="cta-note">Free call · No commitment · 15 minutes · We'll show you live</p>
+  </div>
+</section>
+
+<footer>
+  <a href="#" class="footer-logo">Grow<span style="color:var(--saffron)">Bizz</span></a>
+  <p style="margin-top:6px;">© 2025 GrowBizz. All rights reserved.</p>
+</footer>
+
+<div class="sticky-cta" id="stickyCta">
+  <div class="sticky-label">
+    <strong>Free website included</strong>
+    No commitment needed
+  </div>
+  <a href="#book">Book Free Call</a>
+</div>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+  const bookSec = document.getElementById('book');
+  const sticky = document.getElementById('stickyCta');
+  new IntersectionObserver(entries => {
+    sticky.style.display = entries[0].isIntersecting ? 'none' : 'flex';
+  }, { threshold: 0.1 }).observe(bookSec);
+</script>
+</body>
+</html>
